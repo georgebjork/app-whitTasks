@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class TaskCardWidget extends StatelessWidget {
   @override
@@ -12,14 +13,16 @@ class TaskCardWidget extends StatelessWidget {
           horizontal: 24.0),
 
       margin: EdgeInsets.only(
-        bottom: 10.0
+        bottom: 10.0    //Change the distance between two containers 
       ),
       decoration: BoxDecoration(
-        //Chang the color and the rounded edges 
-        color: Colors.grey[600], 
+        //Change the color and the rounded edges and add 50% opacity 
+        color: Colors.grey[600].withOpacity(0.5), 
         borderRadius: BorderRadius.circular(20.0)),
 
-      child: Text("Hello There"),
+      child: Row( 
+        children: [Text("This is an example task", style: TextStyle(color: Colors.white,)),]
+        ),
     );
   }
 }

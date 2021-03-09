@@ -1,6 +1,8 @@
+import 'package:app_whittasks/Widgets/CheckMarkBox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'Classes/Task.dart';
+import 'Widgets/CheckMarkBox.dart';
 
 import 'Widgets/TaskCardWidget.dart';
 import 'Widgets/MyDayHeader.dart';

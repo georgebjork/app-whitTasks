@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'CheckMarkBox.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class TaskCardWidget extends StatelessWidget {
@@ -21,7 +22,7 @@ class TaskCardWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(20.0)),
 
       child: Row( 
-        children: [Text("This is an example task", style: TextStyle(color: Colors.white,)),]
+        children: [CheckMarkBox(), Text("This is an example task", style: TextStyle(color: Colors.white,)),]
         ),
     );
   }

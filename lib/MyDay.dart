@@ -13,6 +13,19 @@ class MyDay extends StatefulWidget {
 }
 
 class MyDayState extends State<MyDay> {
+
+  //This will be a list of tasks for the list view builder 
+  List<TaskCardWidget> tasks = [
+    TaskCardWidget(),
+    TaskCardWidget(),
+    TaskCardWidget(),
+    TaskCardWidget(),
+    TaskCardWidget(),
+    TaskCardWidget(),
+    
+  ];
+
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(elevation: 0.0,),
@@ -20,10 +33,21 @@ class MyDayState extends State<MyDay> {
         width: double.infinity, //This will expand the width of the container to the whole page
         padding: EdgeInsets.only(left: 16.0, right: 16.0, bottom: 20.0),
         color: Colors.grey[900],
+
+
         child: Column(
-            crossAxisAlignment: CrossAxisAlignment
-                .start, //This will shift everything to the left
-            children: [MyDayHeader(), TaskCardWidget(), TaskCardWidget()]),
+            crossAxisAlignment: CrossAxisAlignment.start, //This will shift everything to the left
+            children: <Widget>[
+              MyDayHeader(),
+              Expanded( 
+                child: ListView.builder(
+                  itemCount: tasks.length,
+                  itemBuilder: (context, index){
+                    return tasks[index];
+                  }
+                )
+              )
+            ]),
       ),
       
         drawer: Drawer(

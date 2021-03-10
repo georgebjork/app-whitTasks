@@ -4,6 +4,7 @@ import 'CheckMarkBox.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class TaskCardWidget extends StatelessWidget {
+  String taskText = "Hello World";
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,7 +23,7 @@ class TaskCardWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(20.0)),
 
       child: Row( 
-        children: [CheckMarkBox(), Text("This is an example task", style: TextStyle(color: Colors.white,)),]
+        children: [CheckMarkBox(), Text(taskText, style: TextStyle(color: Colors.white,)),]
         ),
     );
   }

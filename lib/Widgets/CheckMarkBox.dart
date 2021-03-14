@@ -1,13 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import '../Classes/Task.dart';
+import 'package:provider/provider.dart';
+import '../Classes/TaskProvider.dart';
 
 class CheckMarkBox extends StatefulWidget {
-  CheckMarkBoxState createState() => CheckMarkBoxState();
+
+  Task task;
+  CheckMarkBox(this.task);
+
+  CheckMarkBoxState createState() => CheckMarkBoxState(task);
 }
 
 class CheckMarkBoxState extends State<CheckMarkBox> {
   bool _isChecked = false;
+  
+  Task task;
+  CheckMarkBoxState(this.task);
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +25,9 @@ class CheckMarkBoxState extends State<CheckMarkBox> {
       onTap: (){
         setState(() {
           _isChecked = !_isChecked;   //Sets the state of the widget 
+          task.isDone = _isChecked;
+          //context.read<TaskProvider>().removeTask(task);
+
         });
       },  
       child: Padding(

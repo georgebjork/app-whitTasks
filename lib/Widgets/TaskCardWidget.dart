@@ -27,7 +27,7 @@ class TaskCardWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(20.0)),
 
       child: Row( 
-        children: [CheckMarkBox(), Column(
+        children: [CheckMarkBox(task), Column(
           children: [
             Text(task.getTask(), style: TextStyle(color: Colors.white, fontSize: 20)),
             //Text("This is a date",style: TextStyle(color: Colors.red[900],)),

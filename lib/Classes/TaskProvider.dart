@@ -9,4 +9,9 @@ class TaskProvider with ChangeNotifier {
     tasks.add(t);
     notifyListeners();
   }
+
+  void removeTask(Task t) {
+    tasks.remove(t);
+    notifyListeners();
+  }
 }

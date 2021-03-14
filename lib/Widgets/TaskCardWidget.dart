@@ -30,7 +30,7 @@ class TaskCardWidget extends StatelessWidget {
         children: [CheckMarkBox(), Column(
           children: [
             Text(task.getTask(), style: TextStyle(color: Colors.white, fontSize: 20)),
-            Text("This is a date",style: TextStyle(color: Colors.red[900],)),
+            //Text("This is a date",style: TextStyle(color: Colors.red[900],)),
           ],
         ),]
         ),

@@ -36,6 +36,7 @@ class AddTaskState extends State<AddTask> {
           onSubmitted: (value) {
               //This will access the provider and call our add task function everytime we hit enter 
               context.read<TaskProvider>().addTask(Task(value));
+              taskController.clear();
           },
           controller: taskController,
           decoration: InputDecoration(

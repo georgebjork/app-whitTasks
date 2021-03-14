@@ -1,8 +1,13 @@
+import 'package:app_whittasks/Classes/TaskProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'MyDay.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => TaskProvider(),
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

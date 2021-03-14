@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../Classes/TaskProvider.dart';
 import '../Classes/Task.dart';
+import 'package:provider/provider.dart';
 
 class AddTask extends StatefulWidget {
   AddTaskState createState() => AddTaskState();
@@ -32,12 +34,13 @@ class AddTaskState extends State<AddTask> {
       
       child: TextField(
           onSubmitted: (value) {
-              
+              //This will access the provider and call our add task function everytime we hit enter 
+              context.read<TaskProvider>().addTask(Task(value));
           },
           controller: taskController,
           decoration: InputDecoration(
             border: InputBorder.none,
-            hintText: 'Enter a search term',
+            hintText: 'Enter a task',
             prefixIcon: Icon(Icons.add_circle, size: 25)
         ),
       )

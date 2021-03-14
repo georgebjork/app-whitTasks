@@ -1,5 +1,7 @@
+import 'package:app_whittasks/Classes/TaskProvider.dart';
 import 'package:app_whittasks/Widgets/AddTask.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'Widgets/TaskCardWidget.dart';
 import 'Widgets/MyDayHeader.dart';
@@ -13,10 +15,6 @@ class MyDay extends StatefulWidget {
 class MyDayState extends State<MyDay> {
 
   //This will be a list of tasks for the list view builder 
-  List<Task> tasks = [
-      Task("hello world"),
-  ];
-
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,13 +29,17 @@ class MyDayState extends State<MyDay> {
             crossAxisAlignment: CrossAxisAlignment.start, //This will shift everything to the left
             children: <Widget>[
               MyDayHeader(),
-              Expanded( 
-                child: ListView.builder(
-                  itemCount: tasks.length,
-                  itemBuilder: (context, index){
-                    return TaskCardWidget(tasks[index]);
+              Expanded(
+                child: Consumer<TaskProvider>(
+                  builder: (context, provider, child){
+                    return  ListView.builder(
+                      itemCount: provider.tasks.length,
+                      itemBuilder: (context, index){ 
+                        return TaskCardWidget(provider.tasks[index]);
+                      }
+                    );
                   }
-                )
+                ),
               ),
               Container(alignment: Alignment.bottomLeft, child: AddTask()),
             ]),

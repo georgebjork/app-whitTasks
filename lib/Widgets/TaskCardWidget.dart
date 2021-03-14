@@ -11,7 +11,7 @@ class TaskCardWidget extends StatelessWidget {
       width: double.infinity, //this makes it take up the whole space in the container
       padding: EdgeInsets.symmetric(
           //padding of text in container
-          vertical: 32.0,
+          vertical: 20.0,
           horizontal: 24.0),
 
       margin: EdgeInsets.only(
@@ -23,7 +23,12 @@ class TaskCardWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(20.0)),
 
       child: Row( 
-        children: [CheckMarkBox(), Text(taskText, style: TextStyle(color: Colors.white,)),]
+        children: [CheckMarkBox(), Column(
+          children: [
+            Text(taskText, style: TextStyle(color: Colors.white, fontSize: 20)),
+            Text("This is a date",style: TextStyle(color: Colors.red[900],)),
+          ],
+        ),]
         ),
     );
   }

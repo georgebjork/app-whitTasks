@@ -1,8 +1,7 @@
-import 'package:app_whittasks/Widgets/CheckMarkBox.dart';
+import 'package:app_whittasks/Widgets/AddTask.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
-import 'Classes/Task.dart';
-import 'Widgets/CheckMarkBox.dart';
+
+
 
 import 'Widgets/TaskCardWidget.dart';
 import 'Widgets/MyDayHeader.dart';
@@ -22,7 +21,11 @@ class MyDayState extends State<MyDay> {
     TaskCardWidget(),
     TaskCardWidget(),
     TaskCardWidget(),
-    
+    TaskCardWidget(),
+    TaskCardWidget(),
+    TaskCardWidget(),
+    TaskCardWidget(),
+    TaskCardWidget(),
   ];
 
 
@@ -46,7 +49,8 @@ class MyDayState extends State<MyDay> {
                     return tasks[index];
                   }
                 )
-              )
+              ),
+              Container(alignment: Alignment.bottomLeft, child: AddTask()),
             ]),
       ),
       

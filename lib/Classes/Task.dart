@@ -1,11 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
-
-
 class Task{
 
   String task = "";
-  
+
   Task(String t) {
     task = t;
   }
@@ -14,7 +10,7 @@ class Task{
     task = t;
   }
 
-  get getTask {
+  String getTask() {
     return task;
   }
   

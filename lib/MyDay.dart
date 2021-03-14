@@ -1,10 +1,9 @@
 import 'package:app_whittasks/Widgets/AddTask.dart';
 import 'package:flutter/material.dart';
 
-
-
 import 'Widgets/TaskCardWidget.dart';
 import 'Widgets/MyDayHeader.dart';
+import 'Classes/Task.dart';
 
 class MyDay extends StatefulWidget {
   @override
@@ -14,18 +13,8 @@ class MyDay extends StatefulWidget {
 class MyDayState extends State<MyDay> {
 
   //This will be a list of tasks for the list view builder 
-  List<TaskCardWidget> tasks = [
-    TaskCardWidget(),
-    TaskCardWidget(),
-    TaskCardWidget(),
-    TaskCardWidget(),
-    TaskCardWidget(),
-    TaskCardWidget(),
-    TaskCardWidget(),
-    TaskCardWidget(),
-    TaskCardWidget(),
-    TaskCardWidget(),
-    TaskCardWidget(),
+  List<Task> tasks = [
+      Task("hello world"),
   ];
 
 
@@ -46,7 +35,7 @@ class MyDayState extends State<MyDay> {
                 child: ListView.builder(
                   itemCount: tasks.length,
                   itemBuilder: (context, index){
-                    return tasks[index];
+                    return TaskCardWidget(tasks[index]);
                   }
                 )
               ),

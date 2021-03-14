@@ -1,10 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../Classes/Task.dart';
 import 'CheckMarkBox.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class TaskCardWidget extends StatelessWidget {
-  String taskText = "Hello World";
+  
+  Task task; 
+  TaskCardWidget(this.task);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,7 +29,7 @@ class TaskCardWidget extends StatelessWidget {
       child: Row( 
         children: [CheckMarkBox(), Column(
           children: [
-            Text(taskText, style: TextStyle(color: Colors.white, fontSize: 20)),
+            Text(task.getTask(), style: TextStyle(color: Colors.white, fontSize: 20)),
             Text("This is a date",style: TextStyle(color: Colors.red[900],)),
           ],
         ),]

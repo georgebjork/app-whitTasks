@@ -29,20 +29,25 @@ class AddTaskState extends State<AddTask> {
       ),
       decoration: BoxDecoration(
         //Change the color and the rounded edges and add 50% opacity 
-        color: Colors.red[800].withOpacity(0.5), 
+        color: Colors.grey[600].withOpacity(0.5), 
         borderRadius: BorderRadius.circular(20.0)),
       
       child: TextField(
           onSubmitted: (value) {
               //This will access the provider and call our add task function everytime we hit enter 
-              context.read<TaskProvider>().addTask(Task(value));
-              taskController.clear();
+              //It will check to see if the string is empty. Returns true if it is 
+              if(value.isEmpty == false)
+              {
+                context.read<TaskProvider>().addTask(Task(value));
+                taskController.clear();
+              }
           },
           controller: taskController,
+          style: TextStyle(color: Colors.white),
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: 'Enter a task',
-            prefixIcon: Icon(Icons.add_circle, size: 25)
+            prefixIcon: Icon(Icons.add_circle, size: 25, color: Colors.grey,)
         ),
       )
     );

@@ -29,9 +29,11 @@ class MyDayState extends State<MyDay> {
             crossAxisAlignment: CrossAxisAlignment.start, //This will shift everything to the left
             children: <Widget>[
               MyDayHeader(),
+              //Show tasks need to do still 
               Expanded(
                 child: Consumer<TaskProvider>(
                   builder: (context, provider, child){
+                    //This list view displays a scrollable list of taskcard widgets
                     return  ListView.builder(
                       itemCount: provider.tasks.length,
                       itemBuilder: (context, index){ 

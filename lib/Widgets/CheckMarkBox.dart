@@ -31,7 +31,7 @@ class CheckMarkBoxState extends State<CheckMarkBox> {
         });
       },  
       child: Padding(
-        padding: const EdgeInsets.only(right: 8.0),
+        padding: const EdgeInsets.only(right: 12.0),
 
         child: AnimatedContainer( //An animated contatiner makes to color change with an animation 
           duration: Duration(milliseconds: 1000), //how long the animation is 
@@ -40,8 +40,8 @@ class CheckMarkBoxState extends State<CheckMarkBox> {
             borderRadius : BorderRadius.circular(30.0),   //Makes the box a circle 
             border: _isChecked ? null : Border.all(color: Colors.grey, width: 2.0), //If the it is not selected then we will have a see through circle with a grey border
             color: _isChecked ? Colors.red[900] : Colors.transparent), //If it is selected then it will be red
-          width: 25,
-          height: 25,
+          width: 20,
+          height: 20,
           child: _isChecked ? Icon( //Sets an icon to the check box 
             Icons.check,
             color: Colors.white,

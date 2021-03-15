@@ -1,6 +1,7 @@
 class Task{
 
   String task = "";
+  String details = "Details will be added soon";
   bool isDone = false;
 
   Task(String t) {
@@ -13,6 +14,10 @@ class Task{
 
   String getTask() {
     return task;
+  }
+
+  String getDetails(){
+    return details;
   }
 
   

@@ -36,8 +36,21 @@ class MyDayState extends State<MyDay> {
                     //This list view displays a scrollable list of taskcard widgets
                     return  ListView.builder(
                       itemCount: provider.tasks.length,
-                      itemBuilder: (context, index){ 
-                        return Card(elevation: 0, color: Colors.transparent, child: TaskCardWidget(provider.tasks[index]));
+                      itemBuilder: (context, index){ //Card(elevation: 0, color: Colors.transparent, child: TaskCardWidget(provider.tasks[index]));
+                        return Dismissible(
+                          background: Container(color: Colors.red[900],),
+                          resizeDuration: Duration(seconds: 1),
+                          direction: DismissDirection.endToStart,
+                          onDismissed: (direction){
+                            setState(() {
+                                provider.tasks.removeAt(index);
+                                Scaffold.of(context).showSnackBar(SnackBar(content: Text("Task has been deleted"), duration: Duration(seconds: 3)));
+                            });
+                          },
+                          
+                          key: ValueKey(provider.tasks.elementAt(index)),
+                          child: Card(elevation: 0, color: Colors.transparent, child: TaskCardWidget(provider.tasks[index]))
+                        );
                       }
                     );
                   }

@@ -49,10 +49,10 @@ class MyDayState extends State<MyDay> {
                           },
                           
                           key: ValueKey(provider.tasks.elementAt(index)),
-                          child: Card(elevation: 0, color: Colors.transparent, child: TaskCardWidget(provider.tasks[index]))
+                          child: TaskCardWidget(provider.tasks[index])
                         );
                       }
-                    );
+                    );  // Card(elevation: 0, color: Colors.transparent, child: TaskCardWidget(provider.tasks[index]))
                   }
                 ),
               ),

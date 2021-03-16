@@ -20,6 +20,10 @@ class Task{
     return details;
   }
 
+  bool getState(){
+    return isDone;
+  }
+
   
 }
 

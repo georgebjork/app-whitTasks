@@ -19,7 +19,7 @@ class TaskCardWidget extends StatelessWidget {
           horizontal: 20.0),
 
       margin: EdgeInsets.only(
-        bottom: 10.0    //Change the distance between two containers 
+        bottom: 1.0    //Change the distance between two containers 
       ),
       decoration: BoxDecoration(
         //Change the color and the rounded edges and add 50% opacity 

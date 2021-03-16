@@ -4,6 +4,7 @@ import 'Task.dart';
 
 class TaskProvider with ChangeNotifier {
   List<Task> tasks = [];
+  List<Task> completedTasks = [];
 
   void addTask(Task t) {
     tasks.add(t);
@@ -12,6 +13,7 @@ class TaskProvider with ChangeNotifier {
 
   void removeTask(Task t) {
     tasks.remove(t);
+    //completedTasks.add(t);
     notifyListeners();
   }
 

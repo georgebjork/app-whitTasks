@@ -37,12 +37,13 @@ class MyDayState extends State<MyDay> {
                     return  ListView.builder(
                       itemCount: provider.tasks.length,
                       itemBuilder: (context, index){ 
-                        return TaskCardWidget(provider.tasks[index]);
+                        return Card(elevation: 0, color: Colors.transparent, child: TaskCardWidget(provider.tasks[index]));
                       }
                     );
                   }
                 ),
               ),
+              //Show all completed tasks 
               Container(alignment: Alignment.bottomLeft, child: AddTask()),
             ]),
       ),

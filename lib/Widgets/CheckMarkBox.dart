@@ -13,14 +13,13 @@ class CheckMarkBox extends StatefulWidget {
   CheckMarkBoxState createState() => CheckMarkBoxState(task);
 }
 
-class CheckMarkBoxState extends State<CheckMarkBox> {
-  bool _isChecked = false;
-  
-  Task task;
+class CheckMarkBoxState extends State<CheckMarkBox> {  
+  final Task task;
   CheckMarkBoxState(this.task);
 
   @override
   Widget build(BuildContext context) {
+    bool _isChecked = task.getState();
     return GestureDetector(
       onTap: (){
         setState(() {

@@ -21,4 +21,8 @@ class TaskProvider with ChangeNotifier {
     tasks.removeAt(index);
     notifyListeners();
   }
+
+  void update(){
+    notifyListeners();
+  }
 }

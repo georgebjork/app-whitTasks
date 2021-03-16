@@ -25,6 +25,7 @@ class CheckMarkBoxState extends State<CheckMarkBox> {
         setState(() {
           _isChecked = !_isChecked;   //Sets the state of the widget 
           task.isDone = _isChecked;
+          context.read<TaskProvider>().update();
           //context.read<TaskProvider>().removeTask(task);
 
         });

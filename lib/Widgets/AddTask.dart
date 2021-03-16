@@ -38,7 +38,7 @@ class AddTaskState extends State<AddTask> {
               //It will check to see if the string is empty. Returns true if it is 
               if(value.isEmpty == false)
               {
-                context.read<TaskProvider>().addTask(Task(value));
+                context.read<TaskProvider>().addTask(Task(value, "Today"));
                 taskController.clear();
               }
           },

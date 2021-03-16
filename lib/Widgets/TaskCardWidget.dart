@@ -30,8 +30,13 @@ class TaskCardWidget extends StatelessWidget {
         children: [CheckMarkBox(task), Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(task.getTask(), style: TextStyle(color: Colors.grey[300], fontSize: 15, fontWeight: FontWeight.bold)),
-            Text(task.getDetails(), style: TextStyle(color: Colors.grey[350], fontSize: 12))
+            Text(task.getTask(), style: TextStyle(color: Colors.grey[300], fontSize: 15, fontWeight: FontWeight.bold, decoration: task.isDone ? TextDecoration.lineThrough : TextDecoration.none )),
+            Row(
+              children: <Widget>[
+                Icon(Icons.calendar_today_sharp, color: Colors.white, size: 14 ),
+                Text(task.getDate(), style: TextStyle(color: Colors.grey[350], fontSize: 12,))
+              ],
+            )
           ],
         ),]
         ),

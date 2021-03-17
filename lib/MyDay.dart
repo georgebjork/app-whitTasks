@@ -38,7 +38,7 @@ class MyDayState extends State<MyDay> {
                       itemCount: provider.tasks.length,
                       itemBuilder: (context, index){ //Card(elevation: 0, color: Colors.transparent, child: TaskCardWidget(provider.tasks[index]));
                         return Dismissible(
-                          background: Container(color: Colors.red[900],),
+                          background: Container(decoration: BoxDecoration(color: Colors.red[900], borderRadius: BorderRadius.circular(20.0))),
                           resizeDuration: Duration(seconds: 1),
                           direction: DismissDirection.endToStart,
                           onDismissed: (direction){

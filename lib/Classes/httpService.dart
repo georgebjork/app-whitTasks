@@ -5,6 +5,8 @@ import 'Task.dart';
 import 'package:provider/provider.dart';
 import '../Classes/TaskProvider.dart';
 
+//This class will handle any interactions with the api 
+
 class httpService {
   
   Future<List<Task>> getTask() async {

@@ -2,6 +2,7 @@ import 'package:app_whittasks/Classes/TaskProvider.dart';
 import 'package:app_whittasks/Widgets/AddTask.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'Widgets/TaskCardWidget.dart';
 import 'Widgets/MyDayHeader.dart';
@@ -21,7 +22,7 @@ class MyDayState extends State<MyDay> {
   void initState()
   {
     super.initState();
-    tasks = service.getPost();
+    tasks = service.getTask();
     var x = 0;
     
   }
@@ -41,28 +42,35 @@ class MyDayState extends State<MyDay> {
               MyDayHeader(),
               //Show tasks need to do still 
               Expanded(
-                child: Consumer<TaskProvider>(
-                  builder: (context, provider, child){
-                    //This list view displays a scrollable list of taskcard widgets
-                    return  ListView.builder(
-                      itemCount: provider.tasks.length,
-                      itemBuilder: (context, index){ //Card(elevation: 0, color: Colors.transparent, child: TaskCardWidget(provider.tasks[index]));
+                child: FutureBuilder(
+                  future: service.getTask(),
+                  builder: (BuildContext context, AsyncSnapshot snapshot){
+                    //This will display a loading animation while it pulls tasks
+                    if(snapshot.data == null){
+                        return Container(
+                          child: SpinKitFoldingCube(
+                          itemBuilder: (BuildContext context, int index) {
+                          return DecoratedBox(
+                            decoration: BoxDecoration(
+                            color: Colors.red[900]
+                              ),
+                            );
+                          },
+                        )
+                      );
+                    }
+                    return ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (BuildContext context, int index){
                         return Dismissible(
                           background: Container(decoration: BoxDecoration(color: Colors.red[900], borderRadius: BorderRadius.circular(20.0))),
                           resizeDuration: Duration(seconds: 1),
                           direction: DismissDirection.endToStart,
-                          onDismissed: (direction){
-                            setState(() {
-                                provider.tasks.removeAt(index);
-                                Scaffold.of(context).showSnackBar(SnackBar(content: Text("Task has been deleted"), duration: Duration(seconds: 3)));
-                            });
-                          },
-                          
-                          key: ValueKey(provider.tasks.elementAt(index)),
-                          child: TaskCardWidget(provider.tasks[index])
+                          key: ValueKey(snapshot.data[index]),
+                          child: TaskCardWidget(snapshot.data[index])
                         );
-                      }
-                    );  // Card(elevation: 0, color: Colors.transparent, child: TaskCardWidget(provider.tasks[index]))
+                      },
+                    );
                   }
                 ),
               ),

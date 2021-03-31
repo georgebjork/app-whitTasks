@@ -6,10 +6,12 @@ import 'package:provider/provider.dart';
 import '../Classes/TaskProvider.dart';
 
 class httpService {
-  final String postUrl = "https://api-whittasks.azurewebsites.net/api/task";
+  
+  Future<List<Task>> getTask() async {
+    
+    final String taskUrl = "https://api-whittasks.azurewebsites.net/api/task";
 
-  Future<List<Task>> getPost() async {
-    Response res = await get(postUrl);
+    Response res = await get(taskUrl);
 
     //Successful request
     if(res.statusCode == 200)

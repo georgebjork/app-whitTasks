@@ -1,14 +1,23 @@
+import 'package:flutter/cupertino.dart';
+
 class Task{
 
+  int id;
+  int user_id;
   String task = "";
   String date = "";
   String details = "Details will be added soon";
   bool isDone = false;
 
-  Task(String t, String d) {
-    task = t;
-    date = d;
-  }
+
+  Task(this.task, this.date); 
+
+  Task.fromTask({
+    @required this.task,
+    @required this.date
+  });
+
+
   
   set setTask(String t){
     task = t;
@@ -39,6 +48,15 @@ class Task{
 
   void changeState(){
     isDone = !isDone;
+  }
+
+  factory Task.fromJson(Map<String, dynamic> json)
+  {
+    print(json['name'] as String);
+    return Task.fromTask(
+      task: json['name'] as String,
+      date: "MyDay"
+    );
   }
 
   

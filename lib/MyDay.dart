@@ -6,15 +6,25 @@ import 'package:provider/provider.dart';
 import 'Widgets/TaskCardWidget.dart';
 import 'Widgets/MyDayHeader.dart';
 import 'Classes/Task.dart';
+import 'Classes/httpService.dart';
 
 class MyDay extends StatefulWidget {
+  
   @override
   MyDayState createState() => MyDayState();
 }
 
 class MyDayState extends State<MyDay> {
-
+  final httpService service = httpService();
+  Future<List<Task>> tasks;
   //This will be a list of tasks for the list view builder 
+  void initState()
+  {
+    super.initState();
+    tasks = service.getPost();
+    var x = 0;
+    
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,14 +82,14 @@ class MyDayState extends State<MyDay> {
               ),
             ),
             ListTile(
-              title: Text('Item 1'),
+              title: Text('My Day'),
               onTap: () {
                 // Update the state of the app.
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              title: Text('Item 2'),
+              title: Text('Upcoming'),
               onTap: () {
                 // Update the state of the app.
                 // ...

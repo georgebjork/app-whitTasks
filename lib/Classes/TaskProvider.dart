@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'httpService.dart';
+
 
 import 'Task.dart';
 
 class TaskProvider with ChangeNotifier {
   List<Task> tasks = [];
   List<Task> completedTasks = [];
+
+  Future<Task> futureTask;
 
   void addTask(Task t) {
     tasks.add(t);

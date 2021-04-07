@@ -2,23 +2,24 @@ import 'package:flutter/cupertino.dart';
 
 class Task{
 
-  int id;
-  int user_id;
+  int task_id;
+  int user_id = 0;
   String task = "";
   String date = "";
   String details = "Details will be added soon";
   bool isDone = false;
 
 
-  Task(this.task, this.date); 
+  Task(this.task, this.date, this.user_id, this.task_id); 
 
   Task.fromTask({
     @required this.task,
-    @required this.date
+    @required this.date,
+    @required this.user_id,
+    @required this.task_id
   });
 
 
-  
   set setTask(String t){
     task = t;
   }
@@ -55,7 +56,10 @@ class Task{
     print(json['name'] as String);
     return Task.fromTask(
       task: json['name'] as String,
-      date: "MyDay"
+      date: "MyDay",
+      user_id : json['user_id'] as int,
+      task_id: json['task_id'] as int
+
     );
   }
 

@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import '../Classes/TaskProvider.dart';
 import '../Classes/Task.dart';
 import 'package:provider/provider.dart';
+import '../Classes/httpService.dart';
 
 class AddTask extends StatefulWidget {
+
   AddTaskState createState() => AddTaskState();
 }
 
@@ -13,7 +15,7 @@ class AddTask extends StatefulWidget {
 class AddTaskState extends State<AddTask> {
   String taskText = "Hello World";
   final taskController = TextEditingController();
-
+  httpService h;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,8 +40,10 @@ class AddTaskState extends State<AddTask> {
               //It will check to see if the string is empty. Returns true if it is 
               if(value.isEmpty == false)
               {
-                context.read<TaskProvider>().addTask(Task(value, "Today"));
+                //This will give the task to the provider and the provider will post it to the api
+                context.read<TaskProvider>().addTask(value);
                 taskController.clear();
+                
               }
           },
           controller: taskController,

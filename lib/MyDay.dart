@@ -16,15 +16,10 @@ class MyDay extends StatefulWidget {
 }
 
 class MyDayState extends State<MyDay> {
-  final httpService service = httpService();
-  Future<List<Task>> tasks;
   //This will be a list of tasks for the list view builder 
   void initState()
   {
-    super.initState();
-    tasks = service.getTask();
-    var x = 0;
-    
+       
   }
 
   Widget build(BuildContext context) {
@@ -42,11 +37,13 @@ class MyDayState extends State<MyDay> {
               MyDayHeader(),
               //Show tasks need to do still 
               Expanded(
-                child: FutureBuilder(
-                  future: service.getTask(),
-                  builder: (BuildContext context, AsyncSnapshot snapshot){
-                    //This will display a loading animation while it pulls tasks
-                    if(snapshot.data == null){
+                child: Consumer<TaskProvider>(
+                  builder: (context, provider, child){
+                    return FutureBuilder(
+                      future: provider.service.getTask(),
+                      builder: (BuildContext context, AsyncSnapshot snapshot){
+                      //This will display a loading animation while it pulls tasks
+                      if(snapshot.data == null){
                         return Container(
                           child: SpinKitFoldingCube(
                           itemBuilder: (BuildContext context, int index) {
@@ -59,23 +56,35 @@ class MyDayState extends State<MyDay> {
                         )
                       );
                     }
+                    //If the snapshot does have data we want to populate this in a local list for easier manipulation
+                    if(snapshot.data != null){
+                      //Clear the list expecting there to be new items
+                      provider.tasks.clear();
+                      //Populate list
+                      for(int i = 0; i < snapshot.data.length; i++){
+                        provider.tasks.add(snapshot.data[i]);
+                      }
+                    }
+                      
                     return ListView.builder(
-                      itemCount: snapshot.data.length,
+                      itemCount: provider.tasks.length,
                       itemBuilder: (BuildContext context, int index){
                         return Dismissible(
                           background: Container(decoration: BoxDecoration(color: Colors.red[900], borderRadius: BorderRadius.circular(20.0))),
                           resizeDuration: Duration(seconds: 1),
                           direction: DismissDirection.endToStart,
-                          key: ValueKey(snapshot.data[index]),
-                          child: TaskCardWidget(snapshot.data[index])
+                          key: ValueKey(provider.tasks[index]),
+                          child: TaskCardWidget(provider.tasks[index])
                         );
                       },
                     );
                   }
-                ),
+                );
+                  }
+                )
               ),
               //Show all completed tasks 
-              Container(alignment: Alignment.bottomLeft, child: AddTask()),
+              Container(alignment: Alignment.bottomLeft, child:AddTask()),
             ]),
       ),
       

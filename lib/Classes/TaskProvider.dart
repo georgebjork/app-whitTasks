@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'httpService.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
 
 import 'Task.dart';
 
 class TaskProvider with ChangeNotifier {
-  List<Task> tasks = [];
-  List<Task> completedTasks = [];
 
-  Future<Task> futureTask;
+  final httpService service = httpService();
+  
+  List<Task> tasks = List<Task>();
 
-  void addTask(Task t) {
-    tasks.add(t);
+  Future<void> addTask(String task) async {
+    await service.createTask(task);
     notifyListeners();
   }
 

@@ -28,7 +28,8 @@ class TaskProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void update(){
+  Future<void> update(Task t) async{
+    await service.updateTask(t);
     notifyListeners();
   }
 }

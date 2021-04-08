@@ -10,13 +10,14 @@ class Task{
   bool isDone = false;
 
 
-  Task(this.task, this.date, this.user_id, this.task_id); 
+  Task(this.task, this.date, this.user_id, this.task_id, this.isDone); 
 
   Task.fromTask({
     @required this.task,
     @required this.date,
     @required this.user_id,
-    @required this.task_id
+    @required this.task_id,
+    @required this.isDone
   });
 
 
@@ -58,7 +59,8 @@ class Task{
       task: json['name'] as String,
       date: "MyDay",
       user_id : json['user_id'] as int,
-      task_id: json['task_id'] as int
+      task_id: json['task_id'] as int,
+      isDone: json['done'] as bool
 
     );
   }

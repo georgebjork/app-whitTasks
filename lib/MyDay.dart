@@ -17,10 +17,6 @@ class MyDay extends StatefulWidget {
 
 class MyDayState extends State<MyDay> {
   //This will be a list of tasks for the list view builder 
-  void initState()
-  {
-       
-  }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +36,7 @@ class MyDayState extends State<MyDay> {
                 child: Consumer<TaskProvider>(
                   builder: (context, provider, child){
                     return FutureBuilder(
-                      future: provider.service.getTask(),
+                      future: provider.service.getTask(), 
                       builder: (BuildContext context, AsyncSnapshot snapshot){
                       //This will display a loading animation while it pulls tasks
                       if(snapshot.data == null){

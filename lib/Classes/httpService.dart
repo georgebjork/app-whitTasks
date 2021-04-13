@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:core';
 
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'dart:convert';
@@ -13,15 +14,14 @@ import '../Classes/TaskProvider.dart';
 class httpService {
   final String taskUrl = "https://api-whittasks.azurewebsites.net/api/tasks";
 
-  Future<List<Task>> getTask() async {
+  Future<List<Task>> getTask() async { 
     Response res = await get(taskUrl);
-
+    List<Task> tasks = [];
     //Successful request
     if (res.statusCode == 200) {
       List<dynamic> body = jsonDecode(res.body);
 
-      List<Task> tasks =
-          body.map((dynamic item) => Task.fromJson(item)).toList();
+      tasks = body.map((dynamic item) => Task.fromJson(item)).toList();
 
       return tasks;
 
@@ -55,6 +55,17 @@ class httpService {
           "Accept": "application/json",
           "content-type": "application/json"
         });
+    return res;
+  }
+
+  Future<http.Response> deleteTask(Task t) async {
+    var data = jsonEncode(
+        {'task_id': t.task_id,});
+
+      Response res = await delete(
+        Uri.encodeFull(
+            "https://api-whittasks.azurewebsites.net/api/task/" +
+                t.task_id.toString()),);
     return res;
   }
 }

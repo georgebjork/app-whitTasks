@@ -13,7 +13,7 @@ class AddTask extends StatefulWidget {
 
 
 class AddTaskState extends State<AddTask> {
-  String taskText = "Hello World";
+  final httpService service = httpService();
   final taskController = TextEditingController();
   httpService h;
   @override
@@ -35,14 +35,14 @@ class AddTaskState extends State<AddTask> {
         borderRadius: BorderRadius.circular(20.0)),
       
       child: TextField(
-          onSubmitted: (value) {
+          onSubmitted: (value) async{
               //This will access the provider and call our add task function everytime we hit enter 
               //It will check to see if the string is empty. Returns true if it is 
               if(value.isEmpty == false)
               {
                 //This will give the task to the provider and the provider will post it to the api
-                context.read<TaskProvider>().addTask(value);
                 taskController.clear();
+                await context.read<TaskProvider>().addTask(value);
                 
               }
           },

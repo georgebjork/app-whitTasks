@@ -1,8 +1,10 @@
 import 'package:app_whittasks/Classes/TaskProvider.dart';
 import 'package:app_whittasks/Widgets/AddTask.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'dart:async';
 
 import 'Widgets/TaskCardWidget.dart';
 import 'Widgets/MyDayHeader.dart';
@@ -17,8 +19,20 @@ class MyDay extends StatefulWidget {
 
 class MyDayState extends State<MyDay> {
   //This will be a list of tasks for the list view builder 
+  final httpService service = httpService();
+  StreamController<Task> controller = StreamController<Task>();
+  List<Task> list; 
+  void initState()
+  {
+    super.initState();
+  }
+
+  Stream<List<Task>> getTasks() async* {
+    yield await service.getTask();
+  }
 
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(elevation: 0.0,),
       body: Container(
@@ -35,15 +49,14 @@ class MyDayState extends State<MyDay> {
               Expanded(
                 child: Consumer<TaskProvider>(
                   builder: (context, provider, child){
-                    return FutureBuilder(
-                      future: provider.service.getTask(), 
-                      builder: (BuildContext context, AsyncSnapshot snapshot){
-                      //This will display a loading animation while it pulls tasks
+                    return StreamBuilder(
+                      stream: getTasks(),
+                      builder: (context, snapshot){
                       if(snapshot.data == null){
                         return Container(
                           child: SpinKitFoldingCube(
                           itemBuilder: (BuildContext context, int index) {
-                          return DecoratedBox(
+                            return DecoratedBox(
                             decoration: BoxDecoration(
                             color: Colors.red[900]
                               ),
@@ -52,26 +65,22 @@ class MyDayState extends State<MyDay> {
                         )
                       );
                     }
-                    //If the snapshot does have data we want to populate this in a local list for easier manipulation
-                    if(snapshot.data != null){
-                      //Clear the list expecting there to be new items
-                      provider.tasks.clear();
-                      //Populate list
-                      for(int i = 0; i < snapshot.data.length; i++){
-                        provider.tasks.add(snapshot.data[i]);
-                      }
-                    }
-                      
                     return ListView.builder(
-                      itemCount: provider.tasks.length,
+                      itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int index){
                         return Dismissible(
                           background: Container(decoration: BoxDecoration(color: Colors.red[900], borderRadius: BorderRadius.circular(20.0))),
                           resizeDuration: Duration(seconds: 1),
                           direction: DismissDirection.endToStart,
-                          key: ValueKey(provider.tasks[index]),
-                          child: TaskCardWidget(provider.tasks[index])
-                        );
+                          key: ValueKey(snapshot.data[index]),
+                          child: TaskCardWidget(snapshot.data[index]),
+                          onDismissed: (direction) {
+                          // Remove the item from the data source.
+                          setState(() async {
+                            await provider.removeTask(snapshot.data[index]);
+                            snapshot.data.removeAt(index);
+                          });
+                        });
                       },
                     );
                   }

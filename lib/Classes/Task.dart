@@ -11,6 +11,8 @@ class Task{
 
 
   Task(this.task, this.date, this.user_id, this.task_id, this.isDone); 
+  
+  Task.tempTask(this.task);
 
   Task.fromTask({
     @required this.task,

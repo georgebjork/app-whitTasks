@@ -1,7 +1,6 @@
 import 'package:app_whittasks/Classes/TaskProvider.dart';
 import 'package:app_whittasks/Widgets/AddTask.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'dart:async';
@@ -10,6 +9,7 @@ import 'Widgets/TaskCardWidget.dart';
 import 'Widgets/MyDayHeader.dart';
 import 'Classes/Task.dart';
 import 'Classes/httpService.dart';
+import 'Calendar.dart';
 
 class MyDay extends StatefulWidget {
   
@@ -28,7 +28,7 @@ class MyDayState extends State<MyDay> {
   }
 
   Stream<List<Task>> getTasks() async* {
-    yield await service.getTask();
+    yield await Provider.of<TaskProvider>(context, listen: false).getTasks();
   }
 
   Widget build(BuildContext context) {
@@ -66,19 +66,18 @@ class MyDayState extends State<MyDay> {
                       );
                     }
                     return ListView.builder(
-                      itemCount: snapshot.data.length,
+                      itemCount: provider.tasks.length,
                       itemBuilder: (BuildContext context, int index){
                         return Dismissible(
                           background: Container(decoration: BoxDecoration(color: Colors.red[900], borderRadius: BorderRadius.circular(20.0))),
                           resizeDuration: Duration(seconds: 1),
                           direction: DismissDirection.endToStart,
-                          key: ValueKey(snapshot.data[index]),
-                          child: TaskCardWidget(snapshot.data[index]),
+                          key: ValueKey(provider.tasks[index]),
+                          child: TaskCardWidget(provider.tasks[index]),
                           onDismissed: (direction) {
                           // Remove the item from the data source.
                           setState(() async {
-                            await provider.removeTask(snapshot.data[index]);
-                            snapshot.data.removeAt(index);
+                            await provider.removeTask(provider.tasks[index]);
                           });
                         });
                       },
@@ -114,7 +113,7 @@ class MyDayState extends State<MyDay> {
               title: Text('Upcoming'),
               onTap: () {
                 // Update the state of the app.
-                // ...
+                Navigator.pushNamed(context, '/calendar');
               },
             ),
           ],

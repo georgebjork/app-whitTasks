@@ -35,8 +35,7 @@ class TaskProvider with ChangeNotifier {
 
   Future<void> removeTask(Task t) async {
     tasks.remove(t);
-    await service.deleteTask(t);
-    notifyListeners();
+    service.deleteTask(t).then((v) { notifyListeners(); });
   }
 
   Future<void> update(Task t) async{

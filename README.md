@@ -21,6 +21,6 @@ This video demonstrates a couple of things with our app:
 What needs to be done next:
 - Currently every task is added as user 1. A login in page would solve this 
 -  Dates are shown in yyyy-mm-dd format. A new format and way to edit task dates should be implemented
--  When tasks are added, it takes a second to add it because it must run an SQL procedure before it can be added. A solution is to create a local task and once the new task has been created by the SQL procedure, it will be overriden
-  
+-  When tasks are added, it takes a second to add it because it must run an SQL procedure before it can be added. A solution is to create a local task and once the new task has been created by the SQL procedure, the local task will be overriden
+
 ![Here is Demo Number 2 of WhitTasks](Demo2.gif)

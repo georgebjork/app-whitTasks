@@ -6,16 +6,17 @@ import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'dart:convert';
 import 'Task.dart';
+import 'User.dart';
 import 'package:provider/provider.dart';
 import '../Classes/TaskProvider.dart';
 
 //This class will handle any interactions with the api
 
 class httpService {
-  final String taskUrl = "https://api-whittasks.azurewebsites.net/api/tasks";
+  final String taskUrl = "https://api-whittasks.azurewebsites.net/api/";
 
-  Future<List<Task>> getTask() async { 
-    Response res = await get(taskUrl);
+  Future<List<Task>> getTask(User u) async { 
+    Response res = await get(taskUrl + "tasks/" + u.user_id.toString());
     List<Task> tasks = [];
     //Successful request
     if (res.statusCode == 200) {
@@ -32,23 +33,23 @@ class httpService {
     }
   }
 
-  Future<http.Response> createTask(String task) async {
-    var data = jsonEncode({'user_id': 1, 'name': task});
+  Future<http.Response> createTask(String task, User user) async {
+    var data = jsonEncode({'user_id': user.user_id, 'name': task});
 
-    Response res = await post(Uri.encodeFull(taskUrl), body: data, headers: {
+    Response res = await post(Uri.encodeFull(taskUrl + "tasks"), body: data, headers: {
       "Accept": "application/json",
       "content-type": "application/json"
     });
     return res;
   }
 
-  Future<http.Response> updateTask(Task t) async {
+  Future<http.Response> updateTask(Task t, User user) async {
     var data = jsonEncode(
-        {'task_id': t.task_id, 'user_id': 1, 'name': t.task, 'done': t.isDone});
+        {'task_id': t.task_id, 'user_id': user.user_id, 'name': t.task, 'done': t.isDone});
 
     Response res = await put(
         Uri.encodeFull(
-            "https://api-whittasks.azurewebsites.net/api/task/update/" +
+            taskUrl + "task/update/" +
                 t.task_id.toString()),
         body: data,
         headers: {
@@ -64,8 +65,20 @@ class httpService {
 
       Response res = await delete(
         Uri.encodeFull(
-            "https://api-whittasks.azurewebsites.net/api/task/" +
+            taskUrl + "task/" +
                 t.task_id.toString()),);
     return res;
+  }
+
+  Future<http.Response> login(String email, String password) async {
+    var data = jsonEncode(
+        {'email' : email, 'password' : password});
+
+    Response res = await post(Uri.encodeFull(taskUrl + "users/login"), body: data, headers: {
+      "Accept": "application/json",
+      "content-type": "application/json"
+    });
+    return res;
+
   }
 }

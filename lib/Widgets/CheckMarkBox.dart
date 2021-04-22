@@ -39,7 +39,7 @@ class CheckMarkBoxState extends State<CheckMarkBox> {
           decoration: BoxDecoration(
             borderRadius : BorderRadius.circular(30.0),   //Makes the box a circle 
             border: task.isDone ? null : Border.all(color: Colors.grey, width: 2.0), //If the it is not selected then we will have a see through circle with a grey border
-            color: task.isDone ? Colors.red[900] : Colors.transparent), //If it is selected then it will be red
+            color: task.isDone ?  Theme.of(context).accentColor : Colors.transparent), //If it is selected then it will be red
           width: 20,
           height: 20,
           child: task.isDone ? Icon( //Sets an icon to the check box 

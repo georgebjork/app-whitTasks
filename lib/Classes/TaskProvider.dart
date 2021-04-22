@@ -3,13 +3,16 @@ import 'httpService.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'dart:async';
+import 'dart:convert';
 
 
 import 'Task.dart';
+import 'User.dart';
 
 class TaskProvider with ChangeNotifier {
 
   final httpService service = httpService();
+  User user;
   
   List<Task> tasks = List<Task>();
 
@@ -17,9 +20,11 @@ class TaskProvider with ChangeNotifier {
     //addLocalTask(taskName);
     //Add a small buffer time
     //await Future.delayed(Duration(seconds: 1));
-
-    await service.createTask(taskName);
-    tasks = await service.getTask();
+    
+    //Create a new task
+    await service.createTask(taskName, user);
+    //Get the updated task by calling get task
+    tasks = await service.getTask(user);
     notifyListeners();
   }
 
@@ -29,7 +34,7 @@ class TaskProvider with ChangeNotifier {
   }
 
   Future<List<Task>> getTasks() async{
-    return tasks = await service.getTask();
+    return tasks = await service.getTask(user);
   }
 
 
@@ -39,7 +44,13 @@ class TaskProvider with ChangeNotifier {
   }
 
   Future<void> update(Task t) async{
-    await service.updateTask(t);
+    await service.updateTask(t, user);
     notifyListeners();
+  }
+
+  void addUser(String body){
+    var userJson = jsonDecode(body);
+    User u = User.fromJson(userJson);
+    user = u;
   }
 }

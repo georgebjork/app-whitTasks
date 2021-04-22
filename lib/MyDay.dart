@@ -38,7 +38,6 @@ class MyDayState extends State<MyDay> {
       body: Container(
         width: double.infinity, //This will expand the width of the container to the whole page
         padding: EdgeInsets.only(left: 16.0, right: 16.0, bottom: 20.0),
-        color: Colors.grey[900],
 
 
         child: Column(

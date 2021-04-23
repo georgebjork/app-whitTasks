@@ -119,10 +119,10 @@ class CalendarState extends State<Calendar> {
             Expanded(
               child: Container(
                 width: double.infinity,
-                decoration: BoxDecoration(color: Color(0xFF52000B), borderRadius: BorderRadius.all(Radius.circular(20.0)), 
+                decoration: BoxDecoration(color: Color(0xFF52000B), borderRadius: BorderRadius.all(Radius.circular(25.0)), 
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.5),
+                      color: Colors.black.withOpacity(0.6),
                       spreadRadius: 10,
                       blurRadius: 10,
                       offset: Offset(0, 3), // changes position of shadow

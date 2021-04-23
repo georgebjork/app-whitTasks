@@ -12,10 +12,14 @@ class Login extends StatefulWidget{
 
 class LoginState extends State<Login>{
 
+  //Basic style for font size 
   TextStyle style = TextStyle(fontSize: 20.0);
   
+  //Email and password controller
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  //Service object to do api calls 
   final service = httpService();
 
   @override
@@ -34,13 +38,17 @@ class LoginState extends State<Login>{
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         focusedBorder: OutlineInputBorder(
+          //Border color and width 
           borderSide: BorderSide(color: Colors.grey[800], width: 5.0,),
+          //Adds the rounded edges 
           borderRadius: BorderRadius.circular(20.0),
         ),
         errorBorder: OutlineInputBorder(
+          //Border color red for incorrect input 
           borderSide: BorderSide(color: Colors.red[900], width: 5.0,),
           borderRadius: BorderRadius.circular(20.0),
         ),
+        //Mail icon
         prefixIcon: Icon(Icons.mail),
         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         hintText: "Email",
@@ -48,16 +56,20 @@ class LoginState extends State<Login>{
     );
 
     final passwordField = TextField(
-      obscureText: false,
+      //Hides the text for the input 
+      obscureText: true,
       style: style,
       controller: passwordController,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         focusedBorder: OutlineInputBorder(
+          //Focued border is grey 
           borderSide: BorderSide(color: Colors.grey[800], width: 5.0,),
+          //Gives rounded edges 
           borderRadius: BorderRadius.circular(20.0),
         ),
         errorBorder: OutlineInputBorder(
+          //Red border for error 
           borderSide: BorderSide(color: Colors.red[900], width: 5.0,),
           borderRadius: BorderRadius.circular(20.0),
         ),
@@ -68,15 +80,20 @@ class LoginState extends State<Login>{
     );
 
     final loginButon = Material(
+      //Gives button rounded edges
       borderRadius: BorderRadius.circular(20.0),
+      //Red with a little opacity 
       color: Colors.red[900].withOpacity(0.6),
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () async {
+          //Gives api email and password
           Response res = await service.login(emailController.text, passwordController.text);
           if(res.statusCode == 200){
+            //If true add the user to the provider 
             Provider.of<TaskProvider>(context, listen: false).addUser(res.body);
+            //Go to the home page
             Navigator.pushNamed(context, '/home');
           }
         },

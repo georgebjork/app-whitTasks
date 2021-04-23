@@ -11,7 +11,10 @@ import 'User.dart';
 
 class TaskProvider with ChangeNotifier {
 
+  //httpService object to talk to api
   final httpService service = httpService();
+
+  //This will be our local user
   User user;
   
   List<Task> tasks = List<Task>();
@@ -29,28 +32,38 @@ class TaskProvider with ChangeNotifier {
   }
 
   void addLocalTask(String taskName){
+    //Add a local task
     tasks.add(Task.tempTask(taskName));
+    //Update
     notifyListeners();
   }
 
   Future<List<Task>> getTasks() async{
+    //This will return all the tasks from the api
     return tasks = await service.getTask(user);
   }
 
 
   Future<void> removeTask(Task t) async {
+    //Remove the task locally 
     tasks.remove(t);
+    //Delete and once deleted rebuild
     service.deleteTask(t).then((v) { notifyListeners(); });
   }
 
   Future<void> update(Task t) async{
+    //update the task in the api
     await service.updateTask(t, user);
+    //update
     notifyListeners();
   }
 
   void addUser(String body){
+    //get the string and convert to json
     var userJson = jsonDecode(body);
+    //create a user
     User u = User.fromJson(userJson);
+    //local user is = to the user we made 
     user = u;
   }
 }

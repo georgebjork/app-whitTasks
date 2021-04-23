@@ -23,13 +23,14 @@ class TaskCardWidget extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         //Change the color and the rounded edges and add 50% opacity 
-        color: Colors.grey[600].withOpacity(0.5), 
+        //Theme.of(context).accentColor
+        color: Theme.of(context).cardColor, //.withOpacity(0.6), 
         borderRadius: BorderRadius.circular(20.0)),
 
       child: Row( 
         children: [CheckMarkBox(task), Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
+          children: <Widget>[ 
             Text(task.getTask(), style: TextStyle(color: Colors.grey[300], fontSize: 15, fontWeight: FontWeight.bold, decoration: task.isDone ? TextDecoration.lineThrough : TextDecoration.none )),
             Row(
               children: <Widget>[

@@ -26,8 +26,6 @@ class httpService {
 
       return tasks;
 
-      //return Task.fromJson(jsonDecode(res.body));
-
     } else {
       throw Exception('Failed to load data');
     }

@@ -42,6 +42,7 @@ class TaskCardWidgetState extends State<TaskCardWidget> {
         child: Row( 
           children: [ 
           CheckMarkBox(task), 
+          SizedBox(width: 12),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[ 

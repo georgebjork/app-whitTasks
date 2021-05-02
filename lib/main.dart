@@ -1,4 +1,5 @@
 import 'package:app_whittasks/Calendar.dart';
+import 'package:app_whittasks/Classes/Task.dart';
 import 'package:app_whittasks/Classes/TaskProvider.dart';
 import 'package:app_whittasks/Login.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,8 @@ import 'package:provider/provider.dart';
 import 'Classes/ThemeProvider.dart';
 import 'MyDay.dart';
 import 'Calendar.dart';
+import 'EditTask.dart';
+import 'Classes/Task.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
@@ -32,7 +35,7 @@ class MaterialAppWithTheme extends StatelessWidget{
       theme: theme.getTheme(),
       routes: {
              '/home' : (context) => MyDay(),
-             '/calendar' : (context) => Calendar()
+             '/calendar' : (context) => Calendar(),
            },
            //This will call the my day class and build out the entire page
       home: Login()

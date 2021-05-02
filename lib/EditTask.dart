@@ -34,24 +34,30 @@ class EditTaskState extends State<EditTask>{
         color: Theme.of(context).accentColor,
         width: double.infinity,
 
-         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children:<Widget> [
-            Title(task),
-            SizedBox(height: 40),
-            Expanded(
-              child: Container(
-                width: double.infinity,
-                padding: EdgeInsets.only(left: 30.0, right: 16.0, top: 30.0),
-                decoration: BoxDecoration(color: Theme.of(context).primaryColor, borderRadius: BorderRadius.only(topRight: Radius.circular(25), topLeft: Radius.circular(25))),
-                child: Column(
-                  children: [
-                    DueDate(task),
-                  ],
+         child: Consumer<TaskProvider>(
+           builder:  (context, provider, child) {
+           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children:<Widget> [
+              Title(task),
+              SizedBox(height: 40),
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.only(left: 30.0, right: 16.0, top: 30.0),
+                  decoration: BoxDecoration(color: Theme.of(context).primaryColor, borderRadius: BorderRadius.only(topRight: Radius.circular(25), topLeft: Radius.circular(25))),
+                  child: Column(
+                    children: [
+                      Status(task),
+                      SizedBox(height: 20),
+                      DueDate(task),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+           );
+           }
          )
       ),
     );
@@ -93,9 +99,30 @@ class DueDate extends StatelessWidget{
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(Icons.calendar_today_sharp, color: Colors.white, size: 20 ),
-          SizedBox(width: 10),
+          Icon(Icons.calendar_today_sharp, color: Colors.grey, size: 20 ),
+          SizedBox(width: 12),
           Text(getDate(), style: TextStyle(fontSize: 20))
+        ],
+      ),
+    );
+  }
+}
+
+class Status extends StatelessWidget{
+  Task task; 
+  Status(this.task);
+
+  Widget build(BuildContext context){
+    return Container(
+      child: Row(
+        children: [
+          CheckMarkBox(task),
+          SizedBox(width: 12),
+          AnimatedContainer(
+            duration: Duration(milliseconds: 1000),  
+            curve: Curves.fastOutSlowIn, 
+            child: Text(task.isDone ? "Completed" : "Not Completed",  style: TextStyle(fontSize: 20))
+          ),
         ],
       ),
     );

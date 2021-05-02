@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
+import 'dart:core';
+
 
 class Task{
 
@@ -8,7 +10,7 @@ class Task{
   String task = "";
   String date;
   DateTime due_date;
-  String details = "Details will be added soon";
+  String details;
   bool isDone = false;
 
 
@@ -31,6 +33,18 @@ class Task{
 
   String getTask() {
     return task;
+  }
+
+  DateTime getDueDate(){
+    return due_date;
+  }
+
+  String getFormattedDate(){
+    // if(DateFormat.yMMMMd('en_US').format(due_date) == DateFormat.yMMMMd('en_US').format(DateTime.now()))
+    // {
+    //   return "Today";
+    // }
+    return DateFormat('EEEE, MMMM d').format(due_date).toString();
   }
 
   String getDate(){

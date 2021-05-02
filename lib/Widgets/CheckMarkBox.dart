@@ -30,10 +30,7 @@ class CheckMarkBoxState extends State<CheckMarkBox> {
 
         });
       },  
-      child: Padding(
-        padding: const EdgeInsets.only(right: 12.0),
-
-        child: AnimatedContainer( //An animated contatiner makes to color change with an animation 
+      child: AnimatedContainer( //An animated contatiner makes to color change with an animation 
           duration: Duration(milliseconds: 1000), //how long the animation is 
           curve: Curves.fastLinearToSlowEaseIn, 
           decoration: BoxDecoration(
@@ -48,7 +45,6 @@ class CheckMarkBoxState extends State<CheckMarkBox> {
             size: 15
           ) : null,
         ),
-      ),
     );
   }
 }

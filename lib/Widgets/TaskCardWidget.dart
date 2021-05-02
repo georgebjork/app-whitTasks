@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../Classes/Task.dart';
 import 'CheckMarkBox.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
+import '../EditTask.dart';
 class TaskCardWidget extends StatefulWidget {
   Task task;
   TaskCardWidget(this.task);
@@ -20,8 +20,8 @@ class TaskCardWidgetState extends State<TaskCardWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onLongPress: () {
-        print("hello tap");
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => EditTask(task),),);
       },
       child: Container(
         width: double.infinity, //this makes it take up the whole space in the container
@@ -49,7 +49,8 @@ class TaskCardWidgetState extends State<TaskCardWidget> {
               Row(
                 children: <Widget>[
                   Icon(Icons.calendar_today_sharp, color: Colors.white, size: 14 ),
-                  Text(task.getDate(), style: TextStyle(color: Colors.grey[350], fontSize: 12,))
+                  SizedBox(width: 5),
+                  Text(task.getDate(), style: TextStyle(color: Colors.grey[350], fontSize: 15,))
                 ],
               )
             ],

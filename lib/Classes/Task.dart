@@ -40,10 +40,11 @@ class Task{
   }
 
   String getFormattedDate(){
-    // if(DateFormat.yMMMMd('en_US').format(due_date) == DateFormat.yMMMMd('en_US').format(DateTime.now()))
-    // {
-    //   return "Today";
-    // }
+    due_date = DateTime.parse(date);
+    if(DateFormat.yMMMMd('en_US').format(due_date) == DateFormat.yMMMMd('en_US').format(DateTime.now()))
+    {
+      return "Today";
+    }   
     return DateFormat('EEEE, MMMM d').format(due_date).toString();
   }
 
@@ -90,7 +91,6 @@ class Task{
       user_id : json['user_id'] as int,
       task_id: json['task_id'] as int,
       isDone: json['done'] as bool,
-
     );
   }
 

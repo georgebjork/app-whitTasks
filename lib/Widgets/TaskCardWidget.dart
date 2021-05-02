@@ -50,7 +50,7 @@ class TaskCardWidgetState extends State<TaskCardWidget> {
                 children: <Widget>[
                   Icon(Icons.calendar_today_sharp, color: Colors.white, size: 14 ),
                   SizedBox(width: 5),
-                  Text(task.getDate(), style: TextStyle(color: Colors.grey[350], fontSize: 15,))
+                  Text(task.getFormattedDate(), style: TextStyle(color: Colors.grey[350], fontSize: 15,))
                 ],
               )
             ],

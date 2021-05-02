@@ -78,11 +78,12 @@ class DueDate extends StatelessWidget{
   DueDate(this.task);
 
   String getDate(){
-    if(DateFormat.yMMMMd('en_US').format(task.due_date) == DateFormat.yMMMMd('en_US').format(DateTime.now()))
+    var due_date = DateTime.parse(task.date);
+    if(DateFormat.yMMMMd('en_US').format(due_date) == DateFormat.yMMMMd('en_US').format(DateTime.now()))
     {
       return "Today";
     }
-    return DateFormat('EEEE,  MMMM d').format(task.due_date).toString();
+    return DateFormat('EEEE,  MMMM d').format(due_date).toString();
   }
   
 

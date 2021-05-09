@@ -73,7 +73,7 @@ class LoginState extends State<Login>{
           borderSide: BorderSide(color: Colors.red[900], width: 5.0,),
           borderRadius: BorderRadius.circular(20.0),
         ),
-        prefixIcon: Icon(Icons.password),
+        prefixIcon: Icon(Icons.mail),
         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         hintText: "Password",
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0))),

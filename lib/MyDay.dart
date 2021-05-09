@@ -1,4 +1,5 @@
 import 'package:app_whittasks/Classes/TaskProvider.dart';
+import 'package:app_whittasks/Classes/ThemeProvider.dart';
 import 'package:app_whittasks/Widgets/AddTask.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +23,7 @@ class MyDayState extends State<MyDay> {
   final httpService service = httpService();
   StreamController<Task> controller = StreamController<Task>();
   List<Task> list; 
+  bool _value = false;
   void initState()
   {
     super.initState();
@@ -89,35 +91,75 @@ class MyDayState extends State<MyDay> {
               //Show all completed tasks 
               Container(alignment: Alignment.bottomLeft, child:AddTask()),
             ]),
-      ),
-      
+          ),
         drawer: Drawer(
-          child: ListView(
-          padding: EdgeInsets.zero,
+        // column holds all the widgets in the drawer
+        child: Column(
           children: <Widget>[
-            DrawerHeader(
-              child: Text('Drawer Header'),
-              decoration: BoxDecoration(
-                color: Colors.red[900],
+            Expanded(
+              // ListView contains a group of widgets that scroll inside the drawer
+              child: ListView(
+                children: <Widget>[
+                  DrawerHeader(child: Text(''), decoration: BoxDecoration(color: Theme.of(context).accentColor,),),
+                  ListTile(
+                    title: Text('My Day'),
+                    leading: Icon(Icons.wb_sunny),
+                    onTap: () {
+                    // Update the state of the app.
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text('Calendar'),
+                    leading: Icon(Icons.calendar_today_rounded),
+                    onTap: () {
+                    // Update the state of the app.
+                      Navigator.pushNamed(context, '/calendar');
+                    },
+                  ),
+                ],
               ),
             ),
-            ListTile(
-              title: Text('My Day'),
-              onTap: () {
-                // Update the state of the app.
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Upcoming'),
-              onTap: () {
-                // Update the state of the app.
-                Navigator.pushNamed(context, '/calendar');
-              },
-            ),
+            // This container holds the align
+            Container(
+            // This align moves the children to the bottom
+              child: Align(
+                alignment: FractionalOffset.bottomCenter,
+                // This container holds all the children that will be aligned
+                // on the bottom and should not scroll with the above ListView
+                child: Container(
+                    child: Column(
+                      children: <Widget>[
+                        Divider(),
+                        ListTile(
+                          leading: Icon(Icons.settings),
+                          title: Text('Settings')
+                        ),
+                        SwitchListTile(
+                          title: Text('Light or Dark Mode'),
+                          secondary: _value ? Icon(Icons.brightness_2_outlined) : Icon(Icons.brightness_low_sharp),
+                          value: _value, 
+                          activeColor: Theme.of(context).accentColor,
+                          onChanged: (toggled) {
+                            setState(() {
+                                _value = toggled;
+                                if(_value == true){
+                                  context.read<ThemeProvider>().setTheme("dark");
+                                }else{
+                                  context.read<ThemeProvider>().setTheme("light");
+                                }
+                              }
+                            );
+                          }
+                        )
+                      ],
+                    )
+              )
+              )
+            )
           ],
         ),
-      ),
+      )
     );
   }
 }

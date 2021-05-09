@@ -25,9 +25,6 @@ class CalendarState extends State<Calendar> {
   DateTime _focusedDay = DateTime.now();
   //Day user selected
   DateTime _selectedDay;
-
-  //Dark red
-  Color darkRed_ =  Color(0xFF800000).withOpacity(0.5);
     
   bool checkDate(Task t){
     //create a new date formatter
@@ -89,22 +86,23 @@ class CalendarState extends State<Calendar> {
                   _focusedDay = focusedDay;
                 },
                 calendarStyle: CalendarStyle(
-                  selectedDecoration: BoxDecoration(shape: BoxShape.circle, color: darkRed_),
+                  selectedDecoration: BoxDecoration(shape: BoxShape.circle, color: Theme.of(context).accentColor),
                   todayDecoration:  BoxDecoration(shape: BoxShape.circle, color: Colors.red[900]),
-                  defaultTextStyle: TextStyle(color: Colors.white),
-                  weekendTextStyle: TextStyle(color: Colors.white)
+                  //defaultTextStyle: TextStyle(color: Colors.white),
+                  weekendTextStyle: TextStyle()
                 ),
                 daysOfWeekStyle: DaysOfWeekStyle( 
-                  weekdayStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
-                  weekendStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)
+                  weekdayStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  weekendStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)
                 ),
                 headerStyle: HeaderStyle( 
+                  formatButtonDecoration: BoxDecoration(color: Theme.of(context).accentColor, borderRadius: BorderRadius.all(Radius.circular(25))),
                   formatButtonVisible: true,
                   formatButtonShowsNext: false,
                   titleCentered: false,
-                  titleTextStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
-                  leftChevronIcon: Icon(Icons.chevron_left, color: Colors.white,),
-                  rightChevronIcon: Icon(Icons.chevron_right_outlined, color: Colors.white,),
+                  titleTextStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  leftChevronIcon: Icon(Icons.chevron_left,),
+                  rightChevronIcon: Icon(Icons.chevron_right_outlined,),
                 ),
                 onFormatChanged: (format) {
                   if (_calendarFormat != format) {
@@ -119,15 +117,7 @@ class CalendarState extends State<Calendar> {
             Expanded(
               child: Container(
                 width: double.infinity,
-                decoration: BoxDecoration(color: Color(0xFF52000B), borderRadius: BorderRadius.all(Radius.circular(25.0)), 
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.6),
-                      spreadRadius: 10,
-                      blurRadius: 10,
-                      offset: Offset(0, 3), // changes position of shadow
-                    ),
-                  ],
+                decoration: BoxDecoration(color: Theme.of(context).accentColor, borderRadius: BorderRadius.only(topRight: Radius.circular(36), topLeft: Radius.circular(36)), 
                 ),
                 child: Container(
                   padding: EdgeInsets.only(left: 16.0, right: 16.0, bottom: 20.0, top: 20.0),
@@ -137,7 +127,7 @@ class CalendarState extends State<Calendar> {
                         itemCount: provider.tasks.length,
                         itemBuilder: (BuildContext context, int index){
                           return Dismissible(
-                            background: Container(decoration: BoxDecoration(color: Colors.red[900], borderRadius: BorderRadius.circular(20.0))),
+                            background: Container(decoration: BoxDecoration(color: Theme.of(context).accentColor, borderRadius: BorderRadius.circular(20.0))),
                             resizeDuration: Duration(seconds: 1),
                             direction: DismissDirection.endToStart,
                             key: ValueKey(provider.tasks[index]),

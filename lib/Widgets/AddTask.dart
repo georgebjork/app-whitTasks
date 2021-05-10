@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +17,7 @@ class AddTask extends StatefulWidget {
 class AddTaskState extends State<AddTask> {
   final httpService service = httpService();
   final taskController = TextEditingController();
+  final String defaultText = "Enter a task";
   httpService h;
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,7 @@ class AddTaskState extends State<AddTask> {
       ),
       decoration: BoxDecoration(
         //Change the color and the rounded edges and add 50% opacity 
-        color: Colors.grey[600].withOpacity(0.5), 
+        color: Theme.of(context).cardColor, 
         borderRadius: BorderRadius.circular(20.0)),
       
       child: TextField(
@@ -50,8 +53,9 @@ class AddTaskState extends State<AddTask> {
           style: TextStyle(color: Colors.white),
           decoration: InputDecoration(
             border: InputBorder.none,
-            hintText: 'Enter a task',
-            prefixIcon: Icon(Icons.add_circle, size: 25, color: Colors.grey,)
+            hintText: defaultText,
+            hintStyle: TextStyle(fontSize: 20, color: Colors.white),
+            prefixIcon: Icon(Icons.add, size: 30, color: Colors.white)
         ),
       )
     );

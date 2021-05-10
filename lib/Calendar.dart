@@ -88,7 +88,7 @@ class CalendarState extends State<Calendar> {
                 calendarStyle: CalendarStyle(
                   selectedDecoration: BoxDecoration(shape: BoxShape.circle, color: Theme.of(context).accentColor),
                   todayDecoration:  BoxDecoration(shape: BoxShape.circle, color: Colors.red[900]),
-                  //defaultTextStyle: TextStyle(color: Colors.white),
+                  defaultTextStyle: Theme.of(context).textTheme.bodyText1,
                   weekendTextStyle: TextStyle()
                 ),
                 daysOfWeekStyle: DaysOfWeekStyle( 
@@ -99,6 +99,7 @@ class CalendarState extends State<Calendar> {
                   formatButtonDecoration: BoxDecoration(color: Theme.of(context).accentColor, borderRadius: BorderRadius.all(Radius.circular(25))),
                   formatButtonVisible: true,
                   formatButtonShowsNext: false,
+                  formatButtonTextStyle: TextStyle(color: Colors.white),
                   titleCentered: false,
                   titleTextStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   leftChevronIcon: Icon(Icons.chevron_left,),

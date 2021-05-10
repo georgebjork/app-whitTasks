@@ -30,13 +30,18 @@ class ThemeProvider with ChangeNotifier{
     primaryColor: Color(0xFF2A2B2A), 
     accentColor: Color(0xFFD90824),
     cardColor: Color(0xFF515252),
+    iconTheme: IconThemeData(color: Colors.white),
+    textTheme: TextTheme(
+      bodyText1: TextStyle(color: Colors.white)
+    ),
   );
 
   static final lightTeme = ThemeData(
     scaffoldBackgroundColor: Colors.white,
     primaryColor: Colors.white,
     accentColor: Color(0xFFD90824),
-    cardColor: Color(0xFF515252)
+    cardColor: Color(0xFF515252),
+    iconTheme: IconThemeData(color: Colors.black),
   );
 }
 

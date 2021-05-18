@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class ThemeProvider with ChangeNotifier{
@@ -22,6 +23,31 @@ class ThemeProvider with ChangeNotifier{
 
     notifyListeners();
   }
+
+  Future<bool> getOption() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('option');
+   
+  }
+
+  Future<void> saveOption(bool isSelected) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('option', isSelected);
+   
+  }
+
+  Future<bool> applyTheme() async {
+    bool _value =  await getOption();
+
+    if(_value == true){
+      setTheme("dark");
+    }else{
+      setTheme("light");
+    }
+    return _value;
+
+  }
+
   
 
   static final darkTheme = ThemeData(

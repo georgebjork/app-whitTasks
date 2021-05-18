@@ -31,6 +31,9 @@ class ThemeProvider with ChangeNotifier{
     accentColor: Color(0xFFD90824),
     cardColor: Color(0xFF515252),
     iconTheme: IconThemeData(color: Colors.white),
+    colorScheme: ColorScheme.dark().copyWith(
+        primary: Color(0xFFD90824),
+      ),
     textTheme: TextTheme(
       bodyText1: TextStyle(color: Colors.white)
     ),
@@ -41,6 +44,9 @@ class ThemeProvider with ChangeNotifier{
     primaryColor: Colors.white,
     accentColor: Color(0xFFD90824),
     cardColor: Color(0xFF515252),
+    colorScheme: ColorScheme.light().copyWith(
+        primary: Color(0xFFD90824),
+      ),
     iconTheme: IconThemeData(color: Colors.black),
   );
 }

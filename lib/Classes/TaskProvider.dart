@@ -55,7 +55,9 @@ class TaskProvider with ChangeNotifier {
     //update the task in the api
     await service.updateTask(t, user);
     //update
+    print(t.due_date);
     notifyListeners();
+
   }
 
   void addUser(String body){

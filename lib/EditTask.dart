@@ -38,7 +38,7 @@ class EditTaskState extends State<EditTask>{
            return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children:<Widget> [
-              Title(task),
+              Title(task), //Red title
               SizedBox(height: 40),
               Expanded(
                 child: Container(
@@ -129,15 +129,31 @@ class DueDate extends StatelessWidget{
   
 
   Widget build(BuildContext context){
-    return Container(
-      width: double.infinity,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(Icons.calendar_today_sharp, color: Colors.grey, size: 20 ),
-          SizedBox(width: 12),
-          Text(getDate(), style: TextStyle(fontSize: 20))
-        ],
+    return GestureDetector(
+      onTap: () async {
+        DateTime date = await showDatePicker(
+          context: context,
+          initialDate:  DateTime.now(),
+          firstDate: DateTime(2000), // Required
+          lastDate: DateTime(2025), 
+          initialEntryMode: DatePickerEntryMode.input,
+          helpText: 'Edit Date',
+        );
+        if(date != task.due_date){
+          task.due_date = date;
+          context.read<TaskProvider>().update(task);
+        }
+      },
+      child: Container(
+        width: double.infinity,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(Icons.calendar_today_sharp, color: Colors.grey, size: 20 ),
+            SizedBox(width: 12),
+            Text(getDate(), style: TextStyle(fontSize: 20))
+          ],
+        ),
       ),
     );
   }

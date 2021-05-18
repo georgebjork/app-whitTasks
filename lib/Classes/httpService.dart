@@ -43,7 +43,7 @@ class httpService {
 
   Future<http.Response> updateTask(Task t, User user) async {
     var data = jsonEncode(
-        {'task_id': t.task_id, 'user_id': user.user_id, 'name': t.task, 'done': t.isDone});
+        {'task_id': t.task_id, 'user_id': user.user_id, 'name': t.task, 'done': t.isDone, 'due_date': t.due_date.toString()});
 
     Response res = await put(
         Uri.encodeFull(

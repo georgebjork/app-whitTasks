@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'dart:async';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Widgets/TaskCardWidget.dart';
 import 'Widgets/MyDayHeader.dart';
@@ -26,7 +27,33 @@ class MyDayState extends State<MyDay> {
   bool _value = false;
   void initState()
   {
+    
+    getTheme();
     super.initState();
+  }
+
+  Future<bool> getTheme() async {
+    _value =  await getOption();
+
+    if(_value == true){
+      context.read<ThemeProvider>().setTheme("dark");
+    }else{
+      context.read<ThemeProvider>().setTheme("light");
+    }
+    return _value;
+
+  }
+
+  Future<void> saveOption(bool isSelected) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('option', isSelected);
+   
+  }
+
+  Future<bool> getOption() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('option');
+   
   }
 
   Stream<List<Task>> getTasks() async* {
@@ -124,7 +151,7 @@ class MyDayState extends State<MyDay> {
             Container(
             // This align moves the children to the bottom
               child: Align(
-                alignment: FractionalOffset.bottomCenter,
+              alignment: FractionalOffset.bottomCenter,
                 // This container holds all the children that will be aligned
                 // on the bottom and should not scroll with the above ListView
                 child: Container(
@@ -142,11 +169,14 @@ class MyDayState extends State<MyDay> {
                           activeColor: Theme.of(context).accentColor,
                           onChanged: (toggled) {
                             setState(() {
-                                _value = toggled;
                                 if(_value == true){
-                                  context.read<ThemeProvider>().setTheme("dark");
-                                }else{
                                   context.read<ThemeProvider>().setTheme("light");
+                                  _value = false;
+                                  saveOption(_value);
+                                }else{
+                                  context.read<ThemeProvider>().setTheme("dark");
+                                  _value = true;
+                                  saveOption(_value);
                                 }
                               }
                             );
@@ -154,8 +184,8 @@ class MyDayState extends State<MyDay> {
                         )
                       ],
                     )
-              )
-              )
+                )
+              ),
             )
           ],
         ),

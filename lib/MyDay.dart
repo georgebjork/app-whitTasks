@@ -28,33 +28,10 @@ class MyDayState extends State<MyDay> {
   void initState()
   {
     
-    getTheme();
+    context.read<ThemeProvider>().applyTheme();
     super.initState();
   }
 
-  Future<bool> getTheme() async {
-    _value =  await getOption();
-
-    if(_value == true){
-      context.read<ThemeProvider>().setTheme("dark");
-    }else{
-      context.read<ThemeProvider>().setTheme("light");
-    }
-    return _value;
-
-  }
-
-  Future<void> saveOption(bool isSelected) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('option', isSelected);
-   
-  }
-
-  Future<bool> getOption() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('option');
-   
-  }
 
   Stream<List<Task>> getTasks() async* {
     yield await Provider.of<TaskProvider>(context, listen: false).getTasks();
@@ -172,11 +149,11 @@ class MyDayState extends State<MyDay> {
                                 if(_value == true){
                                   context.read<ThemeProvider>().setTheme("light");
                                   _value = false;
-                                  saveOption(_value);
+                                  context.read<ThemeProvider>().saveOption(_value);
                                 }else{
                                   context.read<ThemeProvider>().setTheme("dark");
                                   _value = true;
-                                  saveOption(_value);
+                                  context.read<ThemeProvider>().saveOption(_value);
                                 }
                               }
                             );

@@ -2,7 +2,9 @@ import 'package:app_whittasks/Classes/TaskProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
+import 'Classes/ThemeProvider.dart';
 import 'Classes/httpService.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class Login extends StatefulWidget{
@@ -22,7 +24,11 @@ class LoginState extends State<Login>{
 
   //Service object to do api calls 
   final service = httpService();
-
+  
+  void initState()
+  {
+    context.read<ThemeProvider>().applyTheme();
+  }
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.

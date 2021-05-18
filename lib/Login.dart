@@ -77,7 +77,7 @@ class LoginState extends State<Login>{
         ),
         errorBorder: OutlineInputBorder(
           //Red border for error 
-          borderSide: BorderSide(color: Colors.red[900], width: 5.0,),
+          borderSide: BorderSide(color: Theme.of(context).accentColor, width: 5.0,),
           borderRadius: BorderRadius.circular(20.0),
         ),
         prefixIcon: Icon(Icons.password),
@@ -90,7 +90,7 @@ class LoginState extends State<Login>{
       //Gives button rounded edges
       borderRadius: BorderRadius.circular(20.0),
       //Red with a little opacity 
-      color: Colors.red[900].withOpacity(0.6),
+      color: Theme.of(context).accentColor,
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),

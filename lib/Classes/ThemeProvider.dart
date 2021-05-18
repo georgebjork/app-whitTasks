@@ -54,7 +54,7 @@ class ThemeProvider with ChangeNotifier{
     brightness: Brightness.dark,
     scaffoldBackgroundColor: Color(0xFF2A2B2A),
     primaryColor: Color(0xFF2A2B2A), 
-    accentColor: Color(0xFFD90824),
+    accentColor: Color(0xFFD90824).withOpacity(0.6),
     cardColor: Color(0xFF515252),
     iconTheme: IconThemeData(color: Colors.white),
     colorScheme: ColorScheme.dark().copyWith(
@@ -66,10 +66,11 @@ class ThemeProvider with ChangeNotifier{
   );
 
   static final lightTeme = ThemeData(
+    brightness: Brightness.light,
     scaffoldBackgroundColor: Colors.white,
     primaryColor: Colors.white,
     accentColor: Color(0xFFD90824),
-    cardColor: Color(0xFF515252),
+    cardColor: Colors.grey[700],
     colorScheme: ColorScheme.light().copyWith(
         primary: Color(0xFFD90824),
       ),

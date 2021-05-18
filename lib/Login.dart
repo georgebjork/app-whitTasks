@@ -25,10 +25,7 @@ class LoginState extends State<Login>{
   //Service object to do api calls 
   final service = httpService();
   
-  void initState()
-  {
-    context.read<ThemeProvider>().applyTheme();
-  }
+ 
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.

@@ -7,8 +7,13 @@ class ThemeProvider with ChangeNotifier{
 
   ThemeData _themeData;
   String key; 
+  bool value;
 
-  ThemeProvider(String key){
+  ThemeProvider(){
+    applyTheme();
+  }
+
+  ThemeProviderArg(String key){
     setTheme(key);
   }
 
@@ -37,14 +42,14 @@ class ThemeProvider with ChangeNotifier{
   }
 
   Future<bool> applyTheme() async {
-    bool _value =  await getOption();
+    value =  await getOption();
 
-    if(_value == true){
+    if(value == true){
       setTheme("dark");
     }else{
       setTheme("light");
     }
-    return _value;
+    return value;
 
   }
 

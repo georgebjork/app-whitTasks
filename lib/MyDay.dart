@@ -28,7 +28,7 @@ class MyDayState extends State<MyDay> {
   void initState()
   {
     
-    context.read<ThemeProvider>().applyTheme();
+    _value = context.read<ThemeProvider>().value;
     super.initState();
   }
 

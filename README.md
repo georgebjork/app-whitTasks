@@ -15,4 +15,4 @@ Here we have a current demo and final of our app.
 This video demonstrates our finished product for our app.
 
 
-![Here is Demo Number 3 of WhitTasks](Final Demo.gif)
+![Here is Demo Number 3 of WhitTasks](Final_Demo.gif)

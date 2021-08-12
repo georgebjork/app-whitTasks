@@ -10,7 +10,7 @@ You can find more about our app and who we are here: https://whittasksdevnode.az
 
 Our final product demonstrates the MyDay page and the Calender page. The MyDay page can create and remove tasks. It can also mark them as completed and the names of tasks can be edited. The Calender page shows tasks based on their due date. Given we only had a little less than one semester to build this app, our app did not feature everything we wanted, but nonetheless, we are very happy with how our final product turned out.
 
-Website code: https://github.com/georgebjork/wbst-whitTasks
+Website code: https://github.com/georgebjork/wbst-whitTasks <br/>
 API Code: https://github.com/georgebjork/api-whitTasks
 
 Here we have the final demo of our app.

@@ -1,5 +1,7 @@
 # app-whitTasks
 
+NOTICE: The Azure database is now offline so that app will not work as intended for the time being. If you want a demo of the app, you can find it a video of it at the bottom o this README.
+
 This is an app built for my Computer Science class, How to Build Darn Near Anything. 
 
 UI design was created by Madeline Schiefelbein.
